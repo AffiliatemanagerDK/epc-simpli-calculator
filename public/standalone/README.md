@@ -3,6 +3,21 @@
 
 En standalone JavaScript beregneren til at beregne Earnings Per Click (EPC) for affiliateprogrammer. Beregneren kan nemt integreres på enhver hjemmeside uden afhængigheder.
 
+## Netlify Deployment
+
+For at deploye denne beregner via Netlify:
+
+1. Opret en konto på [Netlify](https://www.netlify.com/)
+2. Upload dette projekt til et GitHub repository
+3. Gå til Netlify dashboard og klik på "New site from Git"
+4. Vælg dit GitHub repository
+5. Sæt følgende indstillinger:
+   - Build command: (lad denne være tom)
+   - Publish directory: `public/standalone`
+6. Klik på "Deploy site"
+
+Efter deployment, vil din beregner være tilgængelig på den URL, som Netlify genererer.
+
 ## Integration
 
 For at integrere EPC beregneren på din hjemmeside, skal du blot tilføje følgende kode:
@@ -12,8 +27,10 @@ For at integrere EPC beregneren på din hjemmeside, skal du blot tilføje følge
 <div class="epc-calculator-container" data-currency="DKK"></div>
 
 <!-- EPC Beregner Script -->
-<script src="https://cdn.jsdelivr.net/gh/DITHUS/epc-calculator@main/public/standalone/epc-calculator.js"></script>
+<script src="https://your-netlify-site.netlify.app/epc-calculator.js"></script>
 ```
+
+Erstat `your-netlify-site.netlify.app` med din faktiske Netlify URL.
 
 Du kan vælge hvilken valuta beregneren skal bruge (DKK eller USD) ved at ændre `data-currency` attributten:
 
@@ -36,15 +53,3 @@ Du kan vælge hvilken valuta beregneren skal bruge (DKK eller USD) ved at ændre
 2. Beregneren bruger sliders til at justere kommissionsprocent, gennemsnitlig ordreværdi og konverteringsrate.
 3. EPC beregnes dynamisk baseret på formlen: Kommissionsprocent × Gennemsnitlig ordreværdi × Konverteringsrate
 4. Beregneren viser det beregnede EPC og en score for dit affiliateprogram.
-
-## Hostering af filer
-
-Hvis du ønsker at hoste filerne selv i stedet for at bruge CDN, kan du:
-
-1. Download `epc-calculator.js` filen
-2. Upload filen til din egen server
-3. Opdater script-tagget til at pege på din egen fil:
-
-```html
-<script src="path/to/your/epc-calculator.js"></script>
-```
