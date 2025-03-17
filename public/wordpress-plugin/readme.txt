@@ -39,11 +39,25 @@ EPC (Earnings Per Click) beregnes ved at gange Kommissionsprocent med Gennemsnit
 = Kan jeg tilpasse beregneren? =
 Ja, du kan tilpasse beregnerens titel og valuta når du bruger Elementor widgeten.
 
+= Hvorfor ser jeg ikke beregneren efter aktivering? =
+Sørg for at du har tilføjet shortcoden `[epc_calculator]` til en side eller bruger Elementor widgeten. Hvis problemet fortsætter, tjek for JavaScript-fejl i din browsers konsol.
+
+= Er der nogen krav til dette plugin? =
+Pluginet kræver WordPress 5.0 eller nyere og fungerer bedst med moderne browsere. Det har ingen andre plugin-afhængigheder.
+
+= Kan jeg ændre farverne på beregneren? =
+I øjeblikket er farverne fastsat til en teal/grøn gradient. Hvis du er fortrolig med CSS, kan du tilpasse farverne ved at tilføje brugerdefineret CSS til dit tema.
+
 == Screenshots ==
 1. EPC Beregner på en side
 2. EPC Beregner i Elementor
+3. Indstillinger for Elementor widgeten
 
 == Changelog ==
 
 = 1.0.0 =
 * Første udgivelse
+* Tilføjet responsivt design
+* Tilføjet Elementor widget
+* Tilføjet valutavalg (DKK/USD)
+* Grundlæggende funktionalitet implementeret

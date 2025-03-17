@@ -83,7 +83,9 @@ function epc_calculator_register_elementor_widget() {
                     <h2 class="epc-calculator-title"><?php echo esc_html($settings['title']); ?></h2>
                 <?php endif; ?>
                 <div class="epc-calculator-container" data-currency="<?php echo esc_attr($currency); ?>">
-                    <epc-calculator></epc-calculator>
+                    <div class="epc-calculator-wrapper">
+                        <!-- Calculator will be rendered here by JavaScript -->
+                    </div>
                 </div>
             </div>
             <?php
