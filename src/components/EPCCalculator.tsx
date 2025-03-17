@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import EPCSlider from './EPCSlider';
 import ResultCard from './ResultCard';
@@ -55,17 +54,17 @@ const translations = {
     formula: "EPC = Commission Percentage × Average Order Value × Conversion Rate"
   },
   DKK: {
-    title: "Indtjening Per Klik Beregner",
+    title: "Indtjening per klik beregner",
     description: "Optimer din affiliate-strategi ved at beregne din potentielle indtjening per klik.",
     commissionPercentage: "Kommissionsprocent",
-    aov: "Gennemsnitlig Ordreværdi",
+    aov: "Gennemsnitlig ordreværdi",
     conversionRate: "Konverteringsrate",
-    monthlyClicks: "Månedlige Klik",
-    epc: "Indtjening Per Klik",
+    monthlyClicks: "Månedlige klik",
+    epc: "Indtjening per klik",
     epcDescription: "Gennemsnitlig indtjening for hvert klik på dit affiliate-link",
-    monthlyEarnings: "Månedlig Indtjening",
+    monthlyEarnings: "Månedlig indtjening",
     monthlyEarningsDescription: "Estimeret indtjening baseret på dit månedlige klikvolumen",
-    formula: "Indtjening Per Klik = Kommissionsprocent × Gennemsnitlig Ordreværdi × Konverteringsrate"
+    formula: "Indtjening per klik = Kommissionsprocent × Gennemsnitlig ordreværdi × Konverteringsrate"
   }
 };
 
@@ -79,11 +78,9 @@ const EPCCalculator = () => {
   const [currency, setCurrency] = useState<string>('DKK');
 
   useEffect(() => {
-    // Calculate EPC: Commission Percentage x AOV x Conversion Rate
     const calculatedEpc = (commissionPercentage[0] / 100) * aov[0] * (conversionRate[0] / 100);
     setEpc(calculatedEpc);
     
-    // Calculate Monthly Earnings: EPC x Monthly Clicks
     setMonthlyEarnings(calculatedEpc * monthlyClicks[0]);
   }, [commissionPercentage, aov, conversionRate, monthlyClicks]);
 
