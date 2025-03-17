@@ -23,31 +23,6 @@ const Index = () => {
         </div>
         
         <EPCCalculator />
-        
-        <div className="mt-16 bg-white rounded-lg shadow-md p-6 animate-fade-in" style={{ animationDelay: '300ms' }}>
-          <h2 className="text-2xl font-bold text-dark-slate mb-4">How to Add This Calculator to Your WordPress Site</h2>
-          
-          <div className="space-y-4">
-            <div>
-              <h3 className="text-lg font-semibold text-jade mb-2">Option 1: Embed Using HTML</h3>
-              <p className="mb-2">Add this code to any HTML element in Elementor:</p>
-              <pre className="bg-silk p-4 rounded text-sm overflow-x-auto">
-                &lt;script src="https://yourwebsite.com/epc-calculator.js"&gt;&lt;/script&gt;<br/>
-                &lt;epc-calculator&gt;&lt;/epc-calculator&gt;
-              </pre>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-jade mb-2">Option 2: Using Elementor HTML Widget</h3>
-              <p className="mb-2">Add an HTML widget and paste the code above.</p>
-            </div>
-            
-            <div>
-              <h3 className="text-lg font-semibold text-jade mb-2">Option 3: Contact Us for Installation Help</h3>
-              <p>Need help integrating this calculator? Reach out and we'll assist you.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
