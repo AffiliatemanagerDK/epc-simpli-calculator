@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import EPCCalculator from '../components/EPCCalculator';
+import AffiliatePromo from '../components/AffiliatePromo';
 
 const translations = {
   USD: {
@@ -55,6 +56,11 @@ const Index = () => {
           const event = new CustomEvent('currencyChange', { detail: { currency: newCurrency } });
           window.dispatchEvent(event);
         }} />
+        
+        {/* Add the new AffiliatePromo component */}
+        <div className="mt-16">
+          <AffiliatePromo currency={currency} />
+        </div>
       </div>
     </div>
   );
