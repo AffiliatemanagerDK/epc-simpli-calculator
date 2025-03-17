@@ -21,7 +21,7 @@ const translations = {
     subtitle: "Maksimér dit afkast og din markedsandel med professionel affiliate management",
     buttonText: "FÅ DIN GRATIS AFFILIATE AUDIT",
     startedText: "Kom i gang med et enkelt klik!",
-    emailSubject: "Ja tak, jeg vil gerne have en gratis affiliate performance"
+    emailSubject: "Ja tak, jeg vil gerne have en gratis affiliate performance gennemgang"
   }
 };
 
