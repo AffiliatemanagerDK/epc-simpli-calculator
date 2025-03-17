@@ -3,7 +3,6 @@ import EPCSlider from './EPCSlider';
 import ResultCard from './ResultCard';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { DollarSign, CurrencyIcon } from "lucide-react";
 
 const formatCurrency = (value: number, currency: string): string => {
   if (currency === 'USD') {
@@ -68,7 +67,11 @@ const translations = {
   }
 };
 
-const EPCCalculator = () => {
+interface EPCCalculatorProps {
+  onCurrencyChange?: (currency: string) => void;
+}
+
+const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
   const [commissionPercentage, setCommissionPercentage] = useState<number[]>([20]);
   const [aov, setAov] = useState<number[]>([100]);
   const [conversionRate, setConversionRate] = useState<number[]>([3]);
@@ -84,6 +87,15 @@ const EPCCalculator = () => {
     setMonthlyEarnings(calculatedEpc * monthlyClicks[0]);
   }, [commissionPercentage, aov, conversionRate, monthlyClicks]);
 
+  const handleCurrencyChange = (value: string) => {
+    if (value) {
+      setCurrency(value);
+      if (onCurrencyChange) {
+        onCurrencyChange(value);
+      }
+    }
+  };
+
   const t = translations[currency as keyof typeof translations];
 
   return (
@@ -94,7 +106,7 @@ const EPCCalculator = () => {
           {t.description}
         </CardDescription>
         <div className="flex justify-center mt-4">
-          <ToggleGroup type="single" value={currency} onValueChange={(value) => value && setCurrency(value)}>
+          <ToggleGroup type="single" value={currency} onValueChange={handleCurrencyChange}>
             <ToggleGroupItem value="DKK" aria-label="DKK Currency">
               DKK
             </ToggleGroupItem>
@@ -104,6 +116,7 @@ const EPCCalculator = () => {
           </ToggleGroup>
         </div>
       </CardHeader>
+      
       <CardContent className="calculator-body">
         <div className="space-y-4">
           <EPCSlider
