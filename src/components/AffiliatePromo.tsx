@@ -28,6 +28,10 @@ const translations = {
 const AffiliatePromo: React.FC<AffiliatePromoProps> = ({ currency }) => {
   const t = translations[currency as keyof typeof translations];
   
+  const handleButtonClick = (e: React.MouseEvent) => {
+    window.location.href = `mailto:kontakt@affiliatemanager.dk?subject=${encodeURIComponent(t.emailSubject)}`;
+  };
+  
   return (
     <div className="w-full py-12 px-4 bg-gradient-to-b from-silk to-white rounded-lg animate-fade-in" style={{ animationDelay: '300ms' }}>
       <div className="max-w-4xl mx-auto text-center">
@@ -40,17 +44,13 @@ const AffiliatePromo: React.FC<AffiliatePromoProps> = ({ currency }) => {
         </p>
         
         <div className="flex justify-center mb-6">
-          <a 
-            href={`mailto:kontakt@affiliatemanager.dk?subject=${encodeURIComponent(t.emailSubject)}`}
-            className="inline-block"
+          <Button 
+            size="lg" 
+            className="bg-jade hover:bg-dark-jade text-white font-bold py-6 px-8 text-lg uppercase tracking-wide transition-all transform hover:scale-105"
+            onClick={handleButtonClick}
           >
-            <Button 
-              size="lg" 
-              className="bg-jade hover:bg-dark-jade text-white font-bold py-6 px-8 text-lg uppercase tracking-wide transition-all transform hover:scale-105"
-            >
-              {t.buttonText}
-            </Button>
-          </a>
+            {t.buttonText}
+          </Button>
         </div>
         
         <p className="text-gray-500 mt-4">
