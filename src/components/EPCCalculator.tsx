@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import EPCSlider from './EPCSlider';
 import ResultCard from './ResultCard';
@@ -79,17 +78,14 @@ const translations = {
   }
 };
 
-// EPC thresholds for scoring
 const getMaxEpcThreshold = (currency: string): number => {
   return currency === 'USD' ? 5.0 : 35.0; // 5.0 USD = 35.0 DKK at exchange rate 7.0
 };
 
-// Calculate score based on EPC value
 const calculateScore = (epc: number, currency: string): number => {
   const maxEpc = getMaxEpcThreshold(currency);
-  // Score is 0-10 based on ratio of epc to maxEpc (capped at 10)
   const score = Math.min(10, (epc / maxEpc) * 10);
-  return Math.round(score * 10) / 10; // Round to one decimal
+  return Math.round(score * 10) / 10;
 };
 
 interface EPCCalculatorProps {
@@ -108,7 +104,6 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
     const calculatedEpc = (commissionPercentage[0] / 100) * aov[0] * (conversionRate[0] / 100);
     setEpc(calculatedEpc);
     
-    // Calculate score based on EPC
     setScore(calculateScore(calculatedEpc, currency));
   }, [commissionPercentage, aov, conversionRate, currency]);
 
@@ -190,7 +185,7 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
                 value={aov}
                 onChange={setAov}
                 min={10}
-                max={1000}
+                max={currency === 'USD' ? 1429 : 10000}
                 step={5}
                 displayValue={formatCurrency(aov[0], currency)}
               />
@@ -215,7 +210,7 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
                 value={conversionRate}
                 onChange={setConversionRate}
                 min={0.1}
-                max={10}
+                max={25}
                 step={0.1}
                 displayValue={formatPercentage(conversionRate[0], currency)}
                 displaySuffix=""
