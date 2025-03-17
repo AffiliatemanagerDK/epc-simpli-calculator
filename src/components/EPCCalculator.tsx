@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import EPCSlider from './EPCSlider';
 import ResultCard from './ResultCard';
@@ -82,10 +83,24 @@ const getMaxEpcThreshold = (currency: string): number => {
   return currency === 'USD' ? 5.0 : 35.0; // 5.0 USD = 35.0 DKK at exchange rate 7.0
 };
 
+// Calculate score based on the new requirements - 3 DKK = 4, 10 DKK = 8
 const calculateScore = (epc: number, currency: string): number => {
-  const maxEpc = getMaxEpcThreshold(currency);
-  const score = Math.min(10, (epc / maxEpc) * 10);
-  return Math.round(score * 10) / 10;
+  // Convert USD to DKK for scoring if needed
+  const epcInDKK = currency === 'USD' ? epc * 7.0 : epc;
+  
+  // New calculation logic based on requirements
+  // 3 DKK = score of 4, 10 DKK = score of 8
+  if (epcInDKK <= 0) return 0;
+  if (epcInDKK <= 3) {
+    // Linear scale from 0-3 DKK maps to 0-4 score
+    return Math.round((epcInDKK / 3 * 4) * 10) / 10;
+  } else if (epcInDKK <= 10) {
+    // Linear scale from 3-10 DKK maps to 4-8 score
+    return Math.round((4 + (epcInDKK - 3) / 7 * 4) * 10) / 10;
+  } else {
+    // Linear scale from 10+ DKK maps to 8-10 score, capping at 10
+    return Math.min(10, Math.round((8 + (epcInDKK - 10) / 25 * 2) * 10) / 10);
+  }
 };
 
 interface EPCCalculatorProps {
@@ -110,6 +125,16 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
   const handleCurrencyChange = (value: string) => {
     if (value) {
       setCurrency(value);
+      
+      // Convert slider values when currency changes
+      if (value === 'USD') {
+        // Convert DKK to USD
+        setAov([Math.round(aov[0] / 7)]);
+      } else {
+        // Convert USD to DKK
+        setAov([Math.round(aov[0] * 7)]);
+      }
+      
       if (onCurrencyChange) {
         onCurrencyChange(value);
       }
