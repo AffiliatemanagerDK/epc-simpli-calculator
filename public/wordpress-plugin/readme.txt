@@ -28,6 +28,11 @@ Dette plugin tilføjer en kraftfuld EPC (Earnings Per Click) beregner til din Wo
 3. Brug shortcode `[epc_calculator]` i dine indlæg eller sider
 4. Eller brug Elementor-widgeten, hvis du har Elementor installeret
 
+**Valuta Valg:**
+Du kan vælge valuta ved at bruge shortcode med currency-attributten:
+`[epc_calculator currency="USD"]` for US dollars
+`[epc_calculator currency="DKK"]` for danske kroner (standard)
+
 **Standalone Integration:**
 Hvis du ønsker at integrere beregneren direkte i din HTML uden WordPress, kan du bruge følgende kode:
 ```html
@@ -45,6 +50,9 @@ EPC (Earnings Per Click) beregnes ved at gange Kommissionsprocenten med den Genn
 
 = Kan jeg tilpasse beregneren? =
 Ja, du kan tilpasse beregnerens titel, når du bruger Elementor-widgeten, og du kan vælge mellem DKK og USD valuta.
+
+= Hvor hostes beregneren? =
+Beregneren hostes på epc.affiliatemanager.dk, hvilket sikrer optimal hastighed og pålidelighed.
 
 == Screenshots ==
 1. EPC Calculator på en side

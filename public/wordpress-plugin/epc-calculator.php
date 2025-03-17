@@ -2,11 +2,11 @@
 <?php
 /**
  * Plugin Name: EPC Calculator
- * Plugin URI: https://yourwebsite.com
+ * Plugin URI: https://epc.affiliatemanager.dk
  * Description: A powerful EPC (Earnings Per Click) calculator for affiliate marketers.
  * Version: 1.0.0
- * Author: Your Name
- * Author URI: https://yourwebsite.com
+ * Author: AffiliateManager.dk
+ * Author URI: https://affiliatemanager.dk
  * Text Domain: epc-calculator
  */
 
@@ -22,16 +22,10 @@ define('EPC_CALCULATOR_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 // Register scripts and styles
 function epc_calculator_enqueue_scripts() {
-    wp_enqueue_style(
-        'epc-calculator-styles',
-        EPC_CALCULATOR_PLUGIN_URL . 'assets/css/epc-calculator.css',
-        array(),
-        EPC_CALCULATOR_VERSION
-    );
-    
+    // Instead of local files, load directly from the subdomain
     wp_enqueue_script(
         'epc-calculator-script',
-        EPC_CALCULATOR_PLUGIN_URL . 'assets/js/epc-calculator-widget.js',
+        'https://epc.affiliatemanager.dk/epc-calculator.js',
         array(),
         EPC_CALCULATOR_VERSION,
         true
@@ -40,8 +34,12 @@ function epc_calculator_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'epc_calculator_enqueue_scripts');
 
 // Register shortcode
-function epc_calculator_shortcode() {
-    return '<div class="epc-calculator-container"><epc-calculator></epc-calculator></div>';
+function epc_calculator_shortcode($atts) {
+    $attributes = shortcode_atts(array(
+        'currency' => 'DKK',
+    ), $atts);
+    
+    return '<div class="epc-calculator-container" data-currency="' . esc_attr($attributes['currency']) . '"></div>';
 }
 add_shortcode('epc_calculator', 'epc_calculator_shortcode');
 
