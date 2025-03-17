@@ -12,14 +12,16 @@ const translations = {
     highlightedText: "Revenue Generating Powerhouse",
     subtitle: "Maximize Your Market Reach with Expert Affiliate Management",
     buttonText: "GET YOUR FREE AFFILIATE AUDIT",
-    startedText: "Get started with a single click!"
+    startedText: "Get started with a single click!",
+    emailSubject: "Yes, give me a free affiliate audit"
   },
   DKK: {
     title: "Omdan dit affiliateprogram til et",
     highlightedText: "indtægtsskabende kraftcenter",
     subtitle: "Maksimér dit afkast og din markedsandel med professionel affiliate management",
     buttonText: "FÅ DIN GRATIS AFFILIATE AUDIT",
-    startedText: "Kom i gang med et enkelt klik!"
+    startedText: "Kom i gang med et enkelt klik!",
+    emailSubject: "Ja tak, jeg vil gerne have en gratis affiliate performance"
   }
 };
 
@@ -39,7 +41,7 @@ const AffiliatePromo: React.FC<AffiliatePromoProps> = ({ currency }) => {
         
         <div className="flex justify-center mb-6">
           <a 
-            href="mailto:kontakt@affiliatemanager.dk?subject=Yes, give me a free affiliate audit"
+            href={`mailto:kontakt@affiliatemanager.dk?subject=${encodeURIComponent(t.emailSubject)}`}
             className="inline-block"
           >
             <Button 
