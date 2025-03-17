@@ -57,29 +57,20 @@ function epc_calculator_register_elementor_widget() {
                     'default' => esc_html__('EPC Calculator for Affiliate Programs', 'epc-calculator'),
                 ]
             );
-            
-            $this->add_control(
-                'currency',
-                [
-                    'label' => esc_html__('Currency', 'epc-calculator'),
-                    'type' => \Elementor\Controls_Manager::SELECT,
-                    'default' => 'DKK',
-                    'options' => [
-                        'DKK' => esc_html__('Danish Krone (DKK)', 'epc-calculator'),
-                        'USD' => esc_html__('US Dollar (USD)', 'epc-calculator'),
-                    ],
-                ]
-            );
 
             $this->end_controls_section();
         }
 
         protected function render() {
             $settings = $this->get_settings_for_display();
-            $currency = $settings['currency'] ?? 'DKK';
-            
-            // Call the shortcode function directly to render the calculator
-            echo epc_calculator_shortcode(['currency' => $currency]);
+            ?>
+            <div class="epc-calculator-elementor-widget">
+                <?php if (!empty($settings['title'])) : ?>
+                    <h2 class="epc-calculator-title"><?php echo esc_html($settings['title']); ?></h2>
+                <?php endif; ?>
+                <epc-calculator></epc-calculator>
+            </div>
+            <?php
         }
     }
 
