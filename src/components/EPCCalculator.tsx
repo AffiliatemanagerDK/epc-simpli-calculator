@@ -24,8 +24,12 @@ const formatCurrency = (value: number, currency: string): string => {
   }
 };
 
-const formatPercentage = (value: number): string => {
-  return `${value.toFixed(2)}%`;
+const formatPercentage = (value: number, currency: string): string => {
+  if (currency === 'USD') {
+    return `${value.toFixed(2)}%`;
+  } else {
+    return `${value.toFixed(2).replace('.', ',')}%`;
+  }
 };
 
 const formatNumber = (value: number, currency: string): string => {
@@ -33,6 +37,35 @@ const formatNumber = (value: number, currency: string): string => {
     return value.toLocaleString('en-US');
   } else {
     return value.toLocaleString('da-DK');
+  }
+};
+
+const translations = {
+  USD: {
+    title: "Earnings Per Click Calculator",
+    description: "Optimize your affiliate strategy by calculating your potential earnings per click.",
+    commissionPercentage: "Commission Percentage",
+    aov: "Average Order Value (AOV)",
+    conversionRate: "Conversion Rate",
+    monthlyClicks: "Monthly Clicks",
+    epc: "Earnings Per Click (EPC)",
+    epcDescription: "Average earnings for each click on your affiliate link",
+    monthlyEarnings: "Monthly Earnings",
+    monthlyEarningsDescription: "Estimated earnings based on your monthly click volume",
+    formula: "EPC = Commission Percentage × Average Order Value × Conversion Rate"
+  },
+  DKK: {
+    title: "Indtjening Per Klik Beregner",
+    description: "Optimer din affiliate-strategi ved at beregne din potentielle indtjening per klik.",
+    commissionPercentage: "Kommissionsprocent",
+    aov: "Gennemsnitlig Ordreværdi",
+    conversionRate: "Konverteringsrate",
+    monthlyClicks: "Månedlige Klik",
+    epc: "Indtjening Per Klik",
+    epcDescription: "Gennemsnitlig indtjening for hvert klik på dit affiliate-link",
+    monthlyEarnings: "Månedlig Indtjening",
+    monthlyEarningsDescription: "Estimeret indtjening baseret på dit månedlige klikvolumen",
+    formula: "Indtjening Per Klik = Kommissionsprocent × Gennemsnitlig Ordreværdi × Konverteringsrate"
   }
 };
 
@@ -54,12 +87,14 @@ const EPCCalculator = () => {
     setMonthlyEarnings(calculatedEpc * monthlyClicks[0]);
   }, [commissionPercentage, aov, conversionRate, monthlyClicks]);
 
+  const t = translations[currency as keyof typeof translations];
+
   return (
     <Card className="calculator-container animate-fade-in">
       <CardHeader className="calculator-header">
-        <CardTitle className="text-3xl text-center">Earnings Per Click Calculator</CardTitle>
+        <CardTitle className="text-3xl text-center">{t.title}</CardTitle>
         <CardDescription className="text-white/90 text-center mt-2">
-          Optimize your affiliate strategy by calculating your potential earnings per click.
+          {t.description}
         </CardDescription>
         <div className="flex justify-center mt-4">
           <ToggleGroup type="single" value={currency} onValueChange={(value) => value && setCurrency(value)}>
@@ -75,18 +110,18 @@ const EPCCalculator = () => {
       <CardContent className="calculator-body">
         <div className="space-y-4">
           <EPCSlider
-            label="Commission Percentage"
+            label={t.commissionPercentage}
             value={commissionPercentage}
             onChange={setCommissionPercentage}
             min={1}
             max={100}
             step={0.5}
-            displayValue={formatPercentage(commissionPercentage[0])}
+            displayValue={formatPercentage(commissionPercentage[0], currency)}
             displaySuffix=""
           />
           
           <EPCSlider
-            label="Average Order Value (AOV)"
+            label={t.aov}
             value={aov}
             onChange={setAov}
             min={10}
@@ -96,18 +131,18 @@ const EPCCalculator = () => {
           />
           
           <EPCSlider
-            label="Conversion Rate"
+            label={t.conversionRate}
             value={conversionRate}
             onChange={setConversionRate}
             min={0.1}
             max={10}
             step={0.1}
-            displayValue={formatPercentage(conversionRate[0])}
+            displayValue={formatPercentage(conversionRate[0], currency)}
             displaySuffix=""
           />
           
           <EPCSlider
-            label="Monthly Clicks"
+            label={t.monthlyClicks}
             value={monthlyClicks}
             onChange={setMonthlyClicks}
             min={100}
@@ -118,22 +153,22 @@ const EPCCalculator = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <ResultCard
-              label="Earnings Per Click (EPC)"
+              label={t.epc}
               value={formatCurrency(epc, currency)}
-              description="Average earnings for each click on your affiliate link"
+              description={t.epcDescription}
               delay={100}
             />
             
             <ResultCard
-              label="Monthly Earnings"
+              label={t.monthlyEarnings}
               value={formatCurrency(monthlyEarnings, currency)}
-              description="Estimated earnings based on your monthly click volume"
+              description={t.monthlyEarningsDescription}
               delay={200}
             />
           </div>
           
           <div className="mt-8 text-sm text-muted-foreground text-center">
-            <p>EPC = Commission Percentage × Average Order Value × Conversion Rate</p>
+            <p>{t.formula}</p>
           </div>
         </div>
       </CardContent>
