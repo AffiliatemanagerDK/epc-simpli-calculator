@@ -1,6 +1,6 @@
 
 === EPC Calculator ===
-Contributors: yourname
+Contributors: affiliatemanager
 Tags: calculator, affiliate, marketing, epc, earnings
 Requires at least: 5.0
 Tested up to: 6.4
@@ -35,9 +35,8 @@ Hvis du ønsker at integrere beregneren direkte i din HTML uden WordPress, kan d
 <div class="epc-calculator-container" data-currency="DKK"></div>
 
 <!-- EPC Beregner Script -->
-<script src="https://din-netlify-side.netlify.app/epc-calculator.js"></script>
+<script src="https://epc.affiliatemanager.dk/epc-calculator.js"></script>
 ```
-Erstat 'din-netlify-side.netlify.app' med din faktiske Netlify URL efter deployment.
 
 == Frequently Asked Questions ==
 
