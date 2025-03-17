@@ -8,7 +8,7 @@ const translations = {
     description: "Calculate your Earnings Per Click (EPC) to optimize your affiliate marketing strategy and maximize your revenue."
   },
   DKK: {
-    title: "Indtjening per klik beregner til affiliate-programmer",
+    title: "EPC beregner til affiliateprogrammer",
     description: "Beregn din indtjening per klik (EPC) for at optimere din affiliate marketing-strategi og maksimere din omsætning."
   }
 };
