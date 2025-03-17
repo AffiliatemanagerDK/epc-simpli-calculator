@@ -41,6 +41,17 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-silk py-12 px-4 sm:px-6">
       <div className="max-w-5xl mx-auto">
+        {/* Header with logo */}
+        <div className="flex justify-center mb-8">
+          <a href="https://affiliatemanager.dk/" target="_blank" rel="noopener noreferrer">
+            <img 
+              src="/lovable-uploads/72365295-add8-49b9-aad2-94c18e0a87a9.png" 
+              alt="Affiliate Manager by Marketers" 
+              className="h-16 sm:h-20 w-auto"
+            />
+          </a>
+        </div>
+        
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-dark-slate mb-4 animate-fade-in">
             {t.title}
