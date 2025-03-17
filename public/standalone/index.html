@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPC Beregner til Affiliateprogrammer</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      color: #1f2937;
+      background-color: #f3f4f6;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      color: #059669;
+      margin-bottom: 0.5rem;
+    }
+    .header p {
+      font-size: 1.125rem;
+      color: #4b5563;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .integration-code {
+      background-color: #1f2937;
+      color: #e5e7eb;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      margin-top: 2rem;
+      overflow-x: auto;
+    }
+    .integration-code pre {
+      margin: 0;
+      font-family: monospace;
+      font-size: 0.875rem;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>EPC Beregner til Affiliateprogrammer</h1>
+      <p>Beregn indtjening per klik (EPC) for dit affiliateprogram for at tiltrække og fastholde kvalitetsaffiliates til din webshop.</p>
+    </div>
+    
+    <!-- EPC Calculator -->
+    <div class="epc-calculator-container" data-currency="DKK"></div>
+    
+    <div class="integration-code">
+      <h3 style="color: #10b981; margin-top: 0;">Sådan integrerer du beregneren på din hjemmeside:</h3>
+      <pre><code>&lt;!-- EPC Beregner Container --&gt;
+&lt;div class="epc-calculator-container" data-currency="DKK"&gt;&lt;/div&gt;
+
+&lt;!-- EPC Beregner Script --&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/DITHUS/epc-calculator@main/public/standalone/epc-calculator.js"&gt;&lt;/script&gt;</code></pre>
+      <p style="color: #9ca3af; margin-bottom: 0;">Du kan skifte valuta ved at ændre data-currency til "USD" eller "DKK"</p>
+    </div>
+    
+    <div class="footer">
+      <p>© 2023 EPC Beregner. Alle rettigheder forbeholdes.</p>
+    </div>
+  </div>
+  
+  <!-- Inkluder EPC Calculator Script -->
+  <script src="epc-calculator.js"></script>
+</body>
+</html>
