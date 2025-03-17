@@ -5,11 +5,11 @@ import AffiliatePromo from '../components/AffiliatePromo';
 
 const translations = {
   USD: {
-    title: "Super EPC Calculator for Affiliate Campaigns",
+    title: "EPC Calculator for Affiliate Campaigns",
     description: "Calculate the Earnings Per Click (EPC) for your affiliate program to help attract and retain quality affiliates for your ecommerce store."
   },
   DKK: {
-    title: "Super EPC beregner til affiliateprogrammer",
+    title: "EPC beregner til affiliateprogrammer",
     description: "Beregn indtjening per klik (EPC) for dit affiliateprogram for at tiltrække og fastholde kvalitetsaffiliates til din webshop."
   }
 };
