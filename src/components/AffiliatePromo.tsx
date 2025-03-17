@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 
@@ -15,9 +14,9 @@ const translations = {
     startedText: "Get started with a single click!"
   },
   DKK: {
-    title: "Forvandl Dit Affiliateprogram til en",
-    highlightedText: "Omsætningsgenererende Powerhouse",
-    subtitle: "Maksimer Din Markedsrækkevidde med Ekspert Affiliate Management",
+    title: "Omdan dit affiliateprogram til et",
+    highlightedText: "indtægtsskabende kraftcenter",
+    subtitle: "Maksimér dit afkast og din markedsandel med professionel affiliate management",
     buttonText: "FÅ DIN GRATIS AFFILIATE AUDIT",
     startedText: "Kom i gang med et enkelt klik!"
   }
