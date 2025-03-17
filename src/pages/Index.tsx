@@ -43,7 +43,7 @@ const Index = () => {
       <div className="max-w-5xl mx-auto">
         {/* Header with logo */}
         <div className="flex justify-center mb-8">
-          <a href="https://affiliatemanager.dk/" target="_blank" rel="noopener noreferrer">
+          <a href="https://affiliatemanager.dk/" rel="noopener noreferrer">
             <img 
               src="/lovable-uploads/72365295-add8-49b9-aad2-94c18e0a87a9.png" 
               alt="Affiliate Manager by Marketers" 
