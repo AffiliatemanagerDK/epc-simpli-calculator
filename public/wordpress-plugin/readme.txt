@@ -42,6 +42,13 @@ Ja, du kan tilpasse beregnerens titel og valuta når du bruger Elementor widgete
 = Hvorfor ser jeg ikke beregneren efter aktivering? =
 Sørg for at du har tilføjet shortcoden `[epc_calculator]` til en side eller bruger Elementor widgeten. Hvis problemet fortsætter, tjek for JavaScript-fejl i din browsers konsol.
 
+= Jeg får en fejl om "headers already sent" ved aktivering =
+Dette kan ske hvis der er skjulte tegn i plugin-filen. Prøv disse løsninger:
+1. Deaktiver og genaktiver pluginet
+2. Sørg for at alle PHP-filer er gemt i UTF-8 format uden BOM
+3. Sørg for at der ikke er mellemrum eller nye linjer efter det afsluttende PHP-tag `?>`
+4. Hvis problemet fortsætter, prøv at geninstallere pluginet ved at slette det og derefter installere det igen
+
 = Er der nogen krav til dette plugin? =
 Pluginet kræver WordPress 5.0 eller nyere og fungerer bedst med moderne browsere. Det har ingen andre plugin-afhængigheder.
 
@@ -61,3 +68,9 @@ I øjeblikket er farverne fastsat til en teal/grøn gradient. Hvis du er fortrol
 * Tilføjet Elementor widget
 * Tilføjet valutavalg (DKK/USD)
 * Grundlæggende funktionalitet implementeret
+* Fixet problem med "headers already sent" fejl under aktivering
+
+== Upgrade Notice ==
+
+= 1.0.0 =
+Første udgivelse

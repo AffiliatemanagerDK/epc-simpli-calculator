@@ -1,6 +1,6 @@
 
-// EPC Calculator WordPress Plugin
-// This script handles the embedding of the EPC Calculator in WordPress
+// This script is for the standalone web component version of the EPC Calculator
+// It is separate from the WordPress plugin version
 
 (function() {
   // Create and inject the required CSS
@@ -29,8 +29,8 @@
 
   // Initialize the calculator
   document.addEventListener('DOMContentLoaded', function() {
-    // Load the web component if it's not already defined
-    if (!customElements.get('epc-calculator')) {
+    // Only run for web component version, not WordPress plugin version
+    if (!document.querySelector('.wp-site-blocks')) {
       // Inject styles
       injectStyles();
       

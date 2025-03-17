@@ -74,3 +74,62 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+/* Ensure tooltips are properly styled */
+.epc-calculator-container [id^="tooltip-"] {
+    z-index: 100;
+    max-width: 300px;
+}
+
+/* Make sure the calculator fits well in WordPress environment */
+.epc-calculator {
+    box-sizing: border-box;
+}
+.epc-calculator * {
+    box-sizing: border-box;
+}
+
+/* Fix for WordPress themes that might break the layout */
+.epc-calculator-container .epc-calculator input[type=range] {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.epc-calculator .flex {
+    display: flex;
+}
+
+.epc-calculator .justify-between {
+    justify-content: space-between;
+}
+
+.epc-calculator .items-center {
+    align-items: center;
+}
+
+.epc-calculator .grid {
+    display: grid;
+}
+
+.epc-calculator .grid-cols-1 {
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .epc-calculator .md\:grid-cols-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.epc-calculator .gap-4 {
+    gap: 1rem;
+}
+
+/* Ensure proper display of result cards */
+.epc-calculator-results > div {
+    color: white;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
