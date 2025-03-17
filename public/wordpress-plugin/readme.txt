@@ -44,10 +44,12 @@ Sørg for at du har tilføjet shortcoden `[epc_calculator]` til en side eller br
 
 = Jeg får en fejl om "headers already sent" ved aktivering =
 Dette kan ske hvis der er skjulte tegn i plugin-filen. Prøv disse løsninger:
-1. Deaktiver og genaktiver pluginet
-2. Sørg for at alle PHP-filer er gemt i UTF-8 format uden BOM
-3. Sørg for at der ikke er mellemrum eller nye linjer efter det afsluttende PHP-tag `?>`
-4. Hvis problemet fortsætter, prøv at geninstallere pluginet ved at slette det og derefter installere det igen
+1. Sørg for at alle PHP filer IKKE har whitespace eller tomme linjer før <?php tagget
+2. Hvis du bruger en teksteditor, gem filerne som "UTF-8 without BOM" for at undgå byte order mark
+3. Slet og geninstaller pluginet fra en frisk download
+4. Tjek om dit tema sender output før pluginet aktiveres
+5. Deaktiver alle andre plugins midlertidigt for at se om der er en konflikt
+6. Øg PHP memory limit i din wp-config.php fil (f.eks. define('WP_MEMORY_LIMIT', '128M');)
 
 = Er der nogen krav til dette plugin? =
 Pluginet kræver WordPress 5.0 eller nyere og fungerer bedst med moderne browsere. Det har ingen andre plugin-afhængigheder.
