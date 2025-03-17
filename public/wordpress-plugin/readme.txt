@@ -8,39 +8,42 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A powerful EPC (Earnings Per Click) calculator for affiliate marketers.
+En kraftfuld EPC (Earnings Per Click) beregner til affiliate marketers.
 
 == Description ==
 
-This plugin adds a powerful EPC (Earnings Per Click) calculator to your WordPress site.
+Denne plugin tilføjer en kraftfuld EPC (Earnings Per Click) beregner til din WordPress hjemmeside.
 
-**Key Features:**
-* Calculate EPC based on Commission Percentage, AOV, and Conversion Rate
-* Estimate Monthly Earnings based on traffic volume
-* Interactive sliders for easy calculation
-* Fully responsive design
+**Nøglefunktioner:**
+* Beregn EPC baseret på Kommissionsprocent, Gennemsnitlig Ordreværdi og Konverteringsrate
+* Estimér månedlige indtægter baseret på trafikmængde
+* Interaktive skydere til nem beregning
+* Fuldt responsivt design
 * Elementor integration
+* Understøtter både DKK og USD valuta
 
 == Installation ==
 
-1. Upload the `epc-calculator` folder to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Use the shortcode `[epc_calculator]` in your posts or pages
-4. Or use the Elementor widget if you have Elementor installed
+1. Upload mappen `epc-calculator` til `/wp-content/plugins/` mappen
+2. Aktivér pluginet via 'Plugins' menuen i WordPress
+3. Brug shortcode `[epc_calculator]` i dine indlæg eller sider
+4. Eller brug Elementor widgeten hvis du har Elementor installeret
+
+For valutavalg, brug: `[epc_calculator currency="USD"]` (standard er DKK)
 
 == Frequently Asked Questions ==
 
-= How is EPC calculated? =
-EPC (Earnings Per Click) is calculated by multiplying the Commission Percentage by the Average Order Value (AOV) by the Conversion Rate.
+= Hvordan beregnes EPC? =
+EPC (Earnings Per Click) beregnes ved at gange Kommissionsprocent med Gennemsnitlig Ordreværdi (AOV) med Konverteringsrate.
 
-= Can I customize the calculator? =
-Yes, you can customize the calculator title when using the Elementor widget.
+= Kan jeg tilpasse beregneren? =
+Ja, du kan tilpasse beregnerens titel og valuta når du bruger Elementor widgeten.
 
 == Screenshots ==
-1. EPC Calculator on a page
-2. EPC Calculator in Elementor
+1. EPC Beregner på en side
+2. EPC Beregner i Elementor
 
 == Changelog ==
 
 = 1.0.0 =
-* Initial release
+* Første udgivelse

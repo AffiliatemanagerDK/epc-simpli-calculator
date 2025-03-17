@@ -14,28 +14,37 @@
       style.href = tailwindCDN;
       document.head.appendChild(style);
     }
+
+    // Add custom styles for the calculator
+    const customStyles = document.createElement('style');
+    customStyles.textContent = `
+      .epc-calculator-container {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        max-width: 100%;
+        margin: 0 auto;
+      }
+    `;
+    document.head.appendChild(customStyles);
   }
 
-  // Load the custom element if it's not already defined
-  if (!customElements.get('epc-calculator')) {
-    // Load the web component
-    const script = document.createElement('script');
-    script.src = 'PATH_TO_BUNDLE/epc-calculator-widget.js'; // This path will be updated during build
-    script.async = true;
-    script.onload = function() {
-      console.log('EPC Calculator widget loaded successfully!');
-    };
-    script.onerror = function() {
-      console.error('Failed to load EPC Calculator widget.');
-    };
-    
-    // Inject the script and styles
-    injectStyles();
-    document.head.appendChild(script);
-  }
-  
   // Initialize the calculator
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('EPC Calculator initialized');
+    // Load the web component if it's not already defined
+    if (!customElements.get('epc-calculator')) {
+      // Inject styles
+      injectStyles();
+      
+      // Setup currency from container attribute
+      const containers = document.querySelectorAll('.epc-calculator-container');
+      containers.forEach(container => {
+        const currency = container.dataset.currency || 'DKK';
+        const calculatorElement = container.querySelector('epc-calculator');
+        if (calculatorElement) {
+          calculatorElement.setAttribute('currency', currency);
+        }
+      });
+      
+      console.log('EPC Calculator initialized with currency settings');
+    }
   });
 })();
