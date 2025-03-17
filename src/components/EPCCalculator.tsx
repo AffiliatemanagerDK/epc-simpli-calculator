@@ -3,18 +3,37 @@ import React, { useState, useEffect } from 'react';
 import EPCSlider from './EPCSlider';
 import ResultCard from './ResultCard';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { DollarSign, CurrencyIcon } from "lucide-react";
 
-const formatCurrency = (value: number): string => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }).format(value);
+const formatCurrency = (value: number, currency: string): string => {
+  if (currency === 'USD') {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(value);
+  } else {
+    return new Intl.NumberFormat('da-DK', {
+      style: 'currency',
+      currency: 'DKK',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(value);
+  }
 };
 
 const formatPercentage = (value: number): string => {
   return `${value.toFixed(2)}%`;
+};
+
+const formatNumber = (value: number, currency: string): string => {
+  if (currency === 'USD') {
+    return value.toLocaleString('en-US');
+  } else {
+    return value.toLocaleString('da-DK');
+  }
 };
 
 const EPCCalculator = () => {
@@ -24,6 +43,7 @@ const EPCCalculator = () => {
   const [epc, setEpc] = useState<number>(0);
   const [monthlyClicks, setMonthlyClicks] = useState<number[]>([1000]);
   const [monthlyEarnings, setMonthlyEarnings] = useState<number>(0);
+  const [currency, setCurrency] = useState<string>('DKK');
 
   useEffect(() => {
     // Calculate EPC: Commission Percentage x AOV x Conversion Rate
@@ -41,6 +61,16 @@ const EPCCalculator = () => {
         <CardDescription className="text-white/90 text-center mt-2">
           Optimize your affiliate strategy by calculating your potential earnings per click.
         </CardDescription>
+        <div className="flex justify-center mt-4">
+          <ToggleGroup type="single" value={currency} onValueChange={(value) => value && setCurrency(value)}>
+            <ToggleGroupItem value="DKK" aria-label="DKK Currency">
+              DKK
+            </ToggleGroupItem>
+            <ToggleGroupItem value="USD" aria-label="USD Currency">
+              USD
+            </ToggleGroupItem>
+          </ToggleGroup>
+        </div>
       </CardHeader>
       <CardContent className="calculator-body">
         <div className="space-y-4">
@@ -62,7 +92,7 @@ const EPCCalculator = () => {
             min={10}
             max={1000}
             step={5}
-            displayValue={formatCurrency(aov[0])}
+            displayValue={formatCurrency(aov[0], currency)}
           />
           
           <EPCSlider
@@ -83,20 +113,20 @@ const EPCCalculator = () => {
             min={100}
             max={10000}
             step={100}
-            displayValue={monthlyClicks[0].toLocaleString()}
+            displayValue={formatNumber(monthlyClicks[0], currency)}
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <ResultCard
               label="Earnings Per Click (EPC)"
-              value={formatCurrency(epc)}
+              value={formatCurrency(epc, currency)}
               description="Average earnings for each click on your affiliate link"
               delay={100}
             />
             
             <ResultCard
               label="Monthly Earnings"
-              value={formatCurrency(monthlyEarnings)}
+              value={formatCurrency(monthlyEarnings, currency)}
               description="Estimated earnings based on your monthly click volume"
               delay={200}
             />
