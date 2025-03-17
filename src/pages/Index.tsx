@@ -5,11 +5,11 @@ import EPCCalculator from '../components/EPCCalculator';
 const translations = {
   USD: {
     title: "EPC Calculator for Affiliate Programs",
-    description: "Calculate your Earnings Per Click (EPC) to optimize your affiliate marketing strategy and maximize your revenue."
+    description: "Calculate the Earnings Per Click (EPC) for your affiliate program to help attract and retain quality affiliates for your ecommerce store."
   },
   DKK: {
     title: "EPC beregner til affiliateprogrammer",
-    description: "Beregn din indtjening per klik (EPC) for at optimere din affiliate marketing-strategi og maksimere din omsætning."
+    description: "Beregn indtjening per klik (EPC) for dit affiliateprogram for at tiltrække og fastholde kvalitetsaffiliates til din webshop."
   }
 };
 
