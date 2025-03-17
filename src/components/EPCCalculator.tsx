@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import EPCSlider from './EPCSlider';
 import ResultCard from './ResultCard';
+import ScoreCard from './ScoreCard';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -53,9 +54,11 @@ const translations = {
     conversionTooltip: "The percentage of visitors who complete a purchase after clicking an affiliate link to your store",
     epc: "Earnings Per Click (EPC)",
     epcDescription: "Average earnings for affiliates for each click on their affiliate link to your store",
-    monthlyEarnings: "Monthly Earnings",
-    monthlyEarningsDescription: "Estimated earnings for affiliates based on 1,000 monthly clicks",
-    formula: "EPC = Commission Percentage × Average Order Value × Conversion Rate"
+    score: "Affiliate Program Score",
+    scoreDescription: "Rating of your affiliate program's attractiveness based on EPC value",
+    scoreTooltip: "Score from 0-10: Below 3 is poor, 3-5 is average, 5-7 is good, 7-10 is excellent",
+    formula: "EPC = Commission Percentage × Average Order Value × Conversion Rate",
+    maxEpc: "$5.00 or higher is excellent"
   },
   DKK: {
     title: "Indtjening per klik beregner",
@@ -68,10 +71,25 @@ const translations = {
     conversionTooltip: "Procentdelen af besøgende, der gennemfører et køb efter at have klikket på et affiliate-link til din butik",
     epc: "Indtjening per klik",
     epcDescription: "Gennemsnitlig indtjening for affiliates for hvert klik på deres affiliate-link til din butik",
-    monthlyEarnings: "Månedlig indtjening",
-    monthlyEarningsDescription: "Estimeret indtjening for affiliates baseret på 1.000 månedlige klik",
-    formula: "Indtjening per klik = Kommissionsprocent × Gennemsnitlig ordreværdi × Konverteringsrate"
+    score: "Affiliateprogram Score",
+    scoreDescription: "Vurdering af dit affiliateprograms attraktivitet baseret på EPC-værdi",
+    scoreTooltip: "Score fra 0-10: Under 3 er lav, 3-5 er gennemsnitlig, 5-7 er god, 7-10 er fremragende",
+    formula: "Indtjening per klik = Kommissionsprocent × Gennemsnitlig ordreværdi × Konverteringsrate",
+    maxEpc: "35,00 kr. eller højere er fremragende"
   }
+};
+
+// EPC thresholds for scoring
+const getMaxEpcThreshold = (currency: string): number => {
+  return currency === 'USD' ? 5.0 : 35.0; // 5.0 USD = 35.0 DKK at exchange rate 7.0
+};
+
+// Calculate score based on EPC value
+const calculateScore = (epc: number, currency: string): number => {
+  const maxEpc = getMaxEpcThreshold(currency);
+  // Score is 0-10 based on ratio of epc to maxEpc (capped at 10)
+  const score = Math.min(10, (epc / maxEpc) * 10);
+  return Math.round(score * 10) / 10; // Round to one decimal
 };
 
 interface EPCCalculatorProps {
@@ -83,16 +101,16 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
   const [aov, setAov] = useState<number[]>([100]);
   const [conversionRate, setConversionRate] = useState<number[]>([3]);
   const [epc, setEpc] = useState<number>(0);
-  const [monthlyEarnings, setMonthlyEarnings] = useState<number>(0);
+  const [score, setScore] = useState<number>(0);
   const [currency, setCurrency] = useState<string>('DKK');
-  const [monthlyClicks] = useState<number>(1000); // Default value, no longer adjustable
 
   useEffect(() => {
     const calculatedEpc = (commissionPercentage[0] / 100) * aov[0] * (conversionRate[0] / 100);
     setEpc(calculatedEpc);
     
-    setMonthlyEarnings(calculatedEpc * monthlyClicks);
-  }, [commissionPercentage, aov, conversionRate, monthlyClicks]);
+    // Calculate score based on EPC
+    setScore(calculateScore(calculatedEpc, currency));
+  }, [commissionPercentage, aov, conversionRate, currency]);
 
   const handleCurrencyChange = (value: string) => {
     if (value) {
@@ -212,16 +230,18 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
                 delay={100}
               />
               
-              <ResultCard
-                label={t.monthlyEarnings}
-                value={formatCurrency(monthlyEarnings, currency)}
-                description={t.monthlyEarningsDescription}
+              <ScoreCard
+                score={score}
+                label={t.score}
+                description={t.scoreDescription}
+                tooltip={t.scoreTooltip}
                 delay={200}
               />
             </div>
             
-            <div className="mt-8 text-sm text-muted-foreground text-center">
+            <div className="mt-8 text-sm text-muted-foreground text-center space-y-1">
               <p>{t.formula}</p>
+              <p>{t.maxEpc}</p>
             </div>
           </div>
         </CardContent>
