@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import EPCSlider from './EPCSlider';
 import ResultCard from './ResultCard';
@@ -83,22 +82,15 @@ const getMaxEpcThreshold = (currency: string): number => {
   return currency === 'USD' ? 5.0 : 35.0; // 5.0 USD = 35.0 DKK at exchange rate 7.0
 };
 
-// Calculate score based on the new requirements - 3 DKK = 4, 10 DKK = 8
 const calculateScore = (epc: number, currency: string): number => {
-  // Convert USD to DKK for scoring if needed
   const epcInDKK = currency === 'USD' ? epc * 7.0 : epc;
   
-  // New calculation logic based on requirements
-  // 3 DKK = score of 4, 10 DKK = score of 8
   if (epcInDKK <= 0) return 0;
   if (epcInDKK <= 3) {
-    // Linear scale from 0-3 DKK maps to 0-4 score
     return Math.round((epcInDKK / 3 * 4) * 10) / 10;
   } else if (epcInDKK <= 10) {
-    // Linear scale from 3-10 DKK maps to 4-8 score
     return Math.round((4 + (epcInDKK - 3) / 7 * 4) * 10) / 10;
   } else {
-    // Linear scale from 10+ DKK maps to 8-10 score, capping at 10
     return Math.min(10, Math.round((8 + (epcInDKK - 10) / 25 * 2) * 10) / 10);
   }
 };
@@ -126,12 +118,9 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
     if (value) {
       setCurrency(value);
       
-      // Convert slider values when currency changes
       if (value === 'USD') {
-        // Convert DKK to USD
         setAov([Math.round(aov[0] / 7)]);
       } else {
-        // Convert USD to DKK
         setAov([Math.round(aov[0] * 7)]);
       }
       
@@ -178,7 +167,6 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <span className="text-jade font-medium">{formatPercentage(commissionPercentage[0], currency)}</span>
               </div>
               <EPCSlider
                 value={commissionPercentage}
@@ -204,7 +192,6 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <span className="text-jade font-medium">{formatCurrency(aov[0], currency)}</span>
               </div>
               <EPCSlider
                 value={aov}
@@ -229,7 +216,6 @@ const EPCCalculator = ({ onCurrencyChange }: EPCCalculatorProps) => {
                     </TooltipContent>
                   </Tooltip>
                 </div>
-                <span className="text-jade font-medium">{formatPercentage(conversionRate[0], currency)}</span>
               </div>
               <EPCSlider
                 value={conversionRate}
